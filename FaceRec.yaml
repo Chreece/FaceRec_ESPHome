@@ -11,7 +11,7 @@ substitutions:
 esphome:
   name: $device_name
   includes:
-    - header/FaceRec_TX510.h
+    - FaceRec_TX510.h
   # Change the following to match your ESP board
   platform: ESP32
   board: firebeetle32
