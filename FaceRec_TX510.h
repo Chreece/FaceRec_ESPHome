@@ -111,7 +111,15 @@ void processPacket() {
               id(text_userid).publish_state(String(userId).c_str());
               id(presence_sensor).publish_state("on");
             } else {
-              id(text_reply).publish_state(String(userId).c_str());
+              String sum = String(userId);
+              String text = "Sum: " + String(userId);
+              if( sum != "0"){
+                for(int i = 11; i < bytes.size() - 2; i+=2){
+                  byte id = bytes[i] + bytes[i+1];
+                  text+= ", User ID: " + String(id);
+                }
+              }
+              id(text_reply).publish_state(text.c_str());
             }
           }
           break;
