@@ -39,11 +39,13 @@ Entities exposed:
 *  Binary Sensor:
    * Presence sensor that turns on when the identification process was successful
     
-## Usage
+## Initial Setup
 * Copy the .yaml and .h files in your ESPHome config folder
 * Edit the .yaml file for your ESP settings
 * Create an input number helper on HA with name: `input_number.tx510_input` to enter UserIDs to be deleted
 * Compile & Upload to the ESP
+
+## How to:
   * Register a UserID (Face)
     * Look in front the camera and press the Register User Button in HA or S1 button on the TX510 kit
     * You get on screen and ha responce: `Failed` with a reason or `Success` with the UserID that has been saved (starting with 0)
