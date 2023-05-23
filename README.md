@@ -20,24 +20,40 @@ GND | GND |
 P2: USI1_SD0 | RX |
 P2: USI1_SCLK | TX  | 
 
-Entities exposed: 
-  Switch for turning on/off: 
-    Diplay
-    Backlight
-    Onboard LED Flash
-  Buttons: 
-    Registraion and Identification of faces
-    Query the number of registered faces
-    Clear all the registered faces
-    Query the TX510 version
-    Restart MCU (ESP)
-    Reboot TX510
-  Text Sensors:
-    User ID that recognised or registered. The UserIds start from 0 (first face registered = 0)
-    Responce from the TX510 on every action
-  Binary Sensor:
-    Presence sensor that turns on when the identification process was successful
+Entities exposed:
+*  Switch for turning on/off: 
+   * Diplay
+   * Backlight
+   * Onboard LED Flash
+*  Buttons: 
+   * Registration and Identification of faces
+   * Query the number of registered faces
+   * Delete a UserID # needs an input_number helper in HA with name: `input_number.hx510_input`
+   * Clear all the registered faces
+   * Query the TX510 version
+   * Restart MCU (ESP)
+   * Reboot TX510
+*  Text Sensors:
+   * User ID that recognised or registered. The UserIds start from 0 (first face registered = 0)
+   * Responce from the TX510 on every action
+*  Binary Sensor:
+   * Presence sensor that turns on when the identification process was successful
     
+## Usage
+  * Register a UserID (Face)
+    * Look in front the camera and press the Register User Button in HA or S1 button on the TX510 kit
+    * You get on screen and ha responce: `Failed` with a reason or `Success` with the UserID that has been saved (starting with 0)
+  * Identify a User
+    * Look in front the camera and press the Start Identify Button in HA or S2 button on the TX510 kit
+    * You get on screen and ha responce: `Failed` with a reason or `Success` with the UserID that has been recognised
+  * Delete a UserID
+    * Select the UserID (0-999) from the entity `input_number.hx510_input` in HA
+    * Press the Delete UserID button on HA
+    * You get on screen and ha responce: `Failed` or `Success`
+  * Query Sum and UserIDs saved on TX510:
+    * Press Query Num. Reg. UserIDs Button on HA
+    * You get on screen and ha responce: `Sum:` with the summary of all registered users and the UserIDs that have been registered
+
 This version runs on ESPHome firmware, you can check the version running on [BTHome](https://github.com/Chreece/FaceRec_BTHome) that could potientially run on battery
 
 # In folder [resources](https://github.com/Chreece/FaceRec_BTHome/tree/master/resources) you can find the English firmware + manuals and test tools
