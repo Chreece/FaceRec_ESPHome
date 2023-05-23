@@ -69,21 +69,41 @@ button:
     id: identify
     entity_category: config
     on_press:
+      - lambda: id(back_light_template).publish_state(true);
+      - lambda: id(display_template).publish_state(true);
       - uart.write: [0xEF, 0xAA, 0x12, 0x00, 0x00, 0x00, 0x00, 0x12]
   - platform: template
-    name: "Register Face: ${device_name_pretty}" # Button to register the face currently facing the camera
+    name: "Register User: ${device_name_pretty}" # Button to register the user currently facing the camera
     id: registration
     entity_category: config
     on_press:
+      - lambda: id(back_light_template).publish_state(true);
+      - lambda: id(display_template).publish_state(true);
       - uart.write: [0xEF, 0xAA, 0x13, 0x00, 0x00, 0x00, 0x00, 0x13]
   - platform: template
-    name: "Clear Faces: ${device_name_pretty}" # Button to clear all the registered faces
-    id: clear_face
+    name: "Delete UserID: ${device_name_pretty}" # Button to clear the UserID from the ha entity declared in ESPHome id:'user_input'
+    id: delete_fuserid
+    entity_category: config
+    on_press:
+      then:
+        - uart.write:
+            id: uart_bus 
+            data: !lambda
+                    std::string value_str = id(user_input).state;
+                    uint16_t value = static_cast<uint16_t>(std::stoi(value_str, nullptr, 0));
+                    uint8_t highByte = value >> 8;
+                    uint8_t lowByte = value & 0xFF;
+                    uint8_t checksum = 0x22 + highByte + lowByte;
+                    std::vector<uint8_t> data = {0xEF, 0xAA, 0x20, 0x00, 0x00, 0x00, 0x02, highByte, lowByte, checksum};
+                    return data;
+  - platform: template
+    name: "Clear ALL Users: ${device_name_pretty}" # Button to clear all the registered faces
+    id: clear_all
     entity_category: config
     on_press:
       - uart.write: [0xEF, 0xAA, 0x21, 0x00, 0x00, 0x00, 0x00, 0x21]
   - platform: template
-    name: "Query Num. Reg. Faces: ${device_name_pretty}" # Button to query the number of registered faces
+    name: "Query Num. Reg. UserIDs: ${device_name_pretty}" # Button to query the number of registered faces
     id: query_num
     entity_category: config
     on_press:
@@ -198,4 +218,8 @@ text_sensor:
   - platform: template
     id: reply_template
     name: "${device_name_pretty} Responce"
-    
+  - platform: homeassistant
+    id: user_input
+    name: "User Input"
+    internal: false
+    entity_id: input_number.tx510_input
