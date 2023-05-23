@@ -28,7 +28,7 @@ Entities exposed:
 *  Buttons: 
    * Registration and Identification of faces
    * Query the number of registered faces
-   * Delete a UserID # needs an input_number helper in HA with name: `input_number.hx510_input`
+   * Delete a UserID *needs an input_number helper in HA with name: `input_number.hx510_input`*
    * Clear all the registered faces
    * Query the TX510 version
    * Restart MCU (ESP)
