@@ -58,7 +58,7 @@ Entities exposed:
     * You get on screen and ha responce: `Failed` or `Success`
   * Query Sum and UserIDs saved on TX510:
     * Press Query Num. Reg. UserIDs Button on HA
-    * You get on screen and ha responce: `Sum:` with the summary of all registered users and the UserIDs that have been registered
+    * You get a ha responce: `Sum:` with the summary of all registered users and the UserIDs that have been registered
 
 This version runs on ESPHome firmware, you can check the version running on [BTHome](https://github.com/Chreece/FaceRec_BTHome) that could potientially run on battery
 
