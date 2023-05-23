@@ -69,7 +69,6 @@ button:
     id: identify
     entity_category: config
     on_press:
-      - lambda: id(back_light_template).publish_state(true);
       - lambda: id(display_template).publish_state(true);
       - uart.write: [0xEF, 0xAA, 0x12, 0x00, 0x00, 0x00, 0x00, 0x12]
   - platform: template
@@ -77,7 +76,6 @@ button:
     id: registration
     entity_category: config
     on_press:
-      - lambda: id(back_light_template).publish_state(true);
       - lambda: id(display_template).publish_state(true);
       - uart.write: [0xEF, 0xAA, 0x13, 0x00, 0x00, 0x00, 0x00, 0x13]
   - platform: template
