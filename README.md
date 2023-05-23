@@ -48,7 +48,7 @@ Create an input number helper on HA with name: `input_number.tx510_input` to ent
     * Look in front the camera and press the Start Identify Button in HA or S2 button on the TX510 kit
     * You get on screen and ha responce: `Failed` with a reason or `Success` with the UserID that has been recognised
   * Delete a UserID
-    * Select the UserID (0-999) from the entity `input_number.hx510_input` in HA
+    * Input the UserID (0-999) in HA entity `input_number.hx510_input`
     * Press the Delete UserID button on HA
     * You get on screen and ha responce: `Failed` or `Success`
   * Query Sum and UserIDs saved on TX510:
