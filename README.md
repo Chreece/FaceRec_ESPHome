@@ -43,7 +43,6 @@ Entities exposed:
 ## Initial Setup
 * Copy the .yaml and .h files in your ESPHome config folder
 * Edit the .yaml file for your ESP settings
-* Create an input number helper on HA with name: `input_number.tx510_input` to enter UserIDs to be deleted
 * Compile & Upload to the ESP
 
 ## How to:
@@ -54,14 +53,14 @@ Entities exposed:
     * Look in front the camera and press the Start Identify Button in HA or S2 button on the TX510 kit
     * You get on screen and ha responce: `Failed` with a reason or `Success` with the UserID that has been recognised
   * Delete a UserID
-    * Input the UserID (0-999) in HA entity `input_number.hx510_input`
+    * Input the UserID (0-999) in number entity `User Input`
     * Press the Delete UserID button on HA
     * You get on screen and ha responce: `Failed` or `Success`
   * Query Sum and UserIDs saved on TX510:
     * Press Query Num. Reg. UserIDs Button on HA
     * You get a ha responce: `Sum:` with the summary of all registered users and the UserIDs that have been registered
   * Baud Rate change on TX510:
-    * Input the corresponding number for the Baud Rate from the list below, in HA entity `input_number.hx510_input`
+    * Input the corresponding number for the Baud Rate from the list below, in number entity `User Input`
       * 0 = 9600
       * 1 = 19200
       * 2 = 38400
