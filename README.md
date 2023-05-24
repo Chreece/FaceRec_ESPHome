@@ -50,17 +50,20 @@ Entities exposed:
 
 ## How to:
   * Register a UserID (Face)
-    * Look in front the camera and press the Register User Button in HA or S1 button on the TX510 kit
+    * Look in front the camera and press the `Register User` Button in HA or S1 button on the TX510 kit
     * You get on screen and ha responce: `Failed` with a reason or `Success` with the UserID that has been saved (starting with 0)
   * Identify a User
-    * Look in front the camera and press the Start Identify Button in HA or S2 button on the TX510 kit
+    * Look in front the camera and press the `Start Identify` Button in HA or S2 button on the TX510 kit
     * You get on screen and ha responce: `Failed` with a reason or `Success` with the UserID that has been recognised
   * Delete a UserID
     * Input the UserID (0-999) in number entity `User Input`
-    * Press the Delete UserID button on HA
+    * Press the `Delete UserID` button on HA
     * You get on screen and ha responce: `Success` always (even if the UserID doesn't exit, hardware limitation)
+  * Clear all UserIDs
+    * Press the `Clear ALL Users` button on HA
+    * You get on screen and ha responce: `Success`
   * Query Sum and UserIDs saved on TX510:
-    * Press Query Num. Reg. UserIDs Button on HA
+    * Press `Query Num. Reg. UserIDs` Button on HA
     * You get a ha responce: `Sum:` with the summary of all registered users and the UserIDs that have been registered
   * Baud Rate change on TX510:
     * Input the corresponding number for the Baud Rate from the list below, in number entity `User Input`
@@ -69,7 +72,7 @@ Entities exposed:
       * 2 = 38400
       * 3 = 57600
       * 4 = 115200
-    * Press the Change Baud Rate button on HA
+    * Press the `Change Baud Rate` button on HA
     * You get on screen and ha responce: `Success`
 
 This version runs on ESPHome firmware, you can check the version running on [BTHome](https://github.com/Chreece/FaceRec_BTHome) that could potientially run on battery
