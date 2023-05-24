@@ -27,8 +27,8 @@ Entities exposed:
    * `Backlight`
    * Onboard LED `Flash`
 *  Buttons: 
-   * `Registration` and `Identification` of faces
-   * Query the number of registered faces
+   * `Registration` and `Identification` of Users
+   * `Query the number of UserIDs`
    * `Delete a UserID` *needs an input_number helper in HA with name: `input_number.hx510_input`*
    * `Clear all` the registered faces
    * `Query the TX510 version`
