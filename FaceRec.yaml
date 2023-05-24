@@ -14,9 +14,7 @@ esphome:
     - FaceRec_TX510.h
   # Change the following to match your ESP board
   platform: ESP32
-  board: firebeetle32
-  platformio_options:
-    board_upload.flash_size: 4MB
+  board: wemos_d1_mini32
     
 # Enable Home Assistant API
 api:
@@ -106,6 +104,26 @@ button:
     entity_category: config
     on_press:
       - uart.write: [0xEF, 0xAA, 0xC4, 0x00, 0x00, 0x00, 0x00, 0xC4]
+  - platform: template
+    name: "Change Baudrate: ${device_name_pretty}" # Button to change the Baurate from the ha entity declared in ESPHome id:'user_input'
+    id: baudrate_change
+    entity_category: config
+    on_press:
+      then:
+        - uart.write:
+            id: uart_bus 
+            data: !lambda
+                    std::string value_str = id(user_input).state;
+                    uint8_t value_byte = static_cast<uint8_t>(std::stoi(value_str, nullptr, 0));
+                    uint8_t checksum = 0x52 + value_byte;
+                    std::vector<uint8_t> data = {0xEF, 0xAA, 0x51, 0x00, 0x00, 0x00, 0x01, value_byte, checksum};
+                    return data;
+  # Values for Baudrate:
+  # 0 = 9600
+  # 1 = 19200
+  # 2 = 38400
+  # 3 = 57600
+  # 4 = 115200
   - platform: restart
     name: "Restart MCU: ${device_name_pretty}" # Button to restart your ESP
     entity_category: diagnostic
@@ -218,6 +236,6 @@ text_sensor:
     name: "${device_name_pretty} Responce"
   - platform: homeassistant
     id: user_input
-    name: "User Input"
+    name: "${device_name_pretty} User Input"
     internal: false
     entity_id: input_number.tx510_input
