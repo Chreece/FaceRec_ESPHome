@@ -55,7 +55,7 @@ Entities exposed:
   * Delete a UserID
     * Input the UserID (0-999) in number entity `User Input`
     * Press the Delete UserID button on HA
-    * You get on screen and ha responce: `Failed` or `Success`
+    * You get on screen and ha responce: `Success` always (even if the UserID doesn't exit, hardware limitation)
   * Query Sum and UserIDs saved on TX510:
     * Press Query Num. Reg. UserIDs Button on HA
     * You get a ha responce: `Sum:` with the summary of all registered users and the UserIDs that have been registered
@@ -67,6 +67,7 @@ Entities exposed:
       * 3 = 57600
       * 4 = 115200
     * Press the Change Baud Rate button on HA
+    * You get on screen and ha responce: `Success`
 
 This version runs on ESPHome firmware, you can check the version running on [BTHome](https://github.com/Chreece/FaceRec_BTHome) that could potientially run on battery
 
