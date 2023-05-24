@@ -23,23 +23,25 @@ P2: USI1_SCLK | TX  |
 
 Entities exposed:
 *  Switch for turning on/off: 
-   * Diplay
-   * Backlight
-   * Onboard LED Flash
+   * `Diplay`
+   * `Backlight`
+   * Onboard LED `Flash`
 *  Buttons: 
-   * Registration and Identification of faces
+   * `Registration` and `Identification` of faces
    * Query the number of registered faces
-   * Delete a UserID *needs an input_number helper in HA with name: `input_number.hx510_input`*
-   * Clear all the registered faces
-   * Query the TX510 version
-   * Baud rate change
-   * Restart MCU (ESP)
-   * Reboot TX510
+   * `Delete a UserID` *needs an input_number helper in HA with name: `input_number.hx510_input`*
+   * `Clear all` the registered faces
+   * `Query the TX510 version`
+   * `Baud rate change`
+   * `Restart MCU` (ESP)
+   * `Reboot TX510`
 *  Text Sensors:
-   * User ID that recognised or registered. The UserIds start from 0 (first face registered = 0)
-   * Responce from the TX510 on every action
+   * `User ID` that recognised or registered. The UserIds start from 0 (first face registered = 0)
+   * `Responce` from the TX510 on every action
 *  Binary Sensor:
-   * Presence sensor that turns on when the identification process was successful
+   * `Presence sensor` that turns on when the identification process was successful
+* Number:
+  * `User Input` where you can input UserIDs to delete or to change the Baud Rate from TX510
     
 ## Initial Setup
 * Copy the .yaml and .h files in your ESPHome config folder
