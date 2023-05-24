@@ -31,6 +31,7 @@ Entities exposed:
    * Delete a UserID *needs an input_number helper in HA with name: `input_number.hx510_input`*
    * Clear all the registered faces
    * Query the TX510 version
+   * Baud rate change
    * Restart MCU (ESP)
    * Reboot TX510
 *  Text Sensors:
@@ -59,6 +60,14 @@ Entities exposed:
   * Query Sum and UserIDs saved on TX510:
     * Press Query Num. Reg. UserIDs Button on HA
     * You get a ha responce: `Sum:` with the summary of all registered users and the UserIDs that have been registered
+  * Baud Rate change on TX510:
+    * Input the corresponding number for the Baud Rate from the list below, in HA entity `input_number.hx510_input`
+      * 0 = 9600
+      * 1 = 19200
+      * 2 = 38400
+      * 3 = 57600
+      * 4 = 115200
+    * Press the Change Baud Rate button on HA
 
 This version runs on ESPHome firmware, you can check the version running on [BTHome](https://github.com/Chreece/FaceRec_BTHome) that could potientially run on battery
 
