@@ -6,9 +6,9 @@ using namespace esphome;
 #define SYNCWORD2 0xAA
 // Commands:
 #define IDENT 0x12  // Identify
-#define REGIS 0x13  // Register Face
-#define DEL 0x20  // Delete Face
-#define CLR 0x21  // Clear All Faces
+#define REGIS 0x13  // Register User
+#define DEL 0x20  // Delete UserID
+#define CLR 0x21  // Clear All UserIDs
 #define BACKLIT 0xC0  // Backlight control
 #define DISPL 0xC1  // Display Control
 #define FLSH 0xC2 // Flash control
@@ -100,6 +100,7 @@ void processPacket() {
     case BACKLIT:
     case FLSH:
     case REBT:
+    case BAUDRT:
     case NUMBERREC:
       switch(bytes[8]){
         case SUCC:
