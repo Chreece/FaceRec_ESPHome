@@ -13,6 +13,7 @@ It communicates via Serial to an ESP and via ESPHome can be controllable from Ho
 ![20230523_095931](https://github.com/Chreece/FaceRec_ESPHome/assets/68458228/92994688-31d8-4c0b-8c53-ebfb890ee00a)
 
 ## Connection Diagram:
+*Some ESP32 boards can't power the TX510 when in Identification process so if you have strange behaviours make sure TX510 gets it's 5v or else try with another board
 TX510 | ESP | 
 -------- | -------- |
 5V | VCC | 
