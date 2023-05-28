@@ -29,7 +29,7 @@ Entities exposed:
 *  Buttons: 
    * `Registration` and `Identification` of Users
    * `Query the number of UserIDs`
-   * `Delete a UserID` *needs an input_number helper in HA with name: `input_number.hx510_input`*
+   * `Delete a UserID`
    * `Clear all` the registered faces
    * `Query the TX510 version`
    * `Baud rate change`
