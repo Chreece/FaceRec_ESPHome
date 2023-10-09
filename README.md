@@ -7,7 +7,6 @@ DON'T USE THIS PROJECT TO CONTROL SECURITY MEASURES AS LOCKS etc.
 # Description
 It utilizes the [TX510](https://www.hlktech.net/index.php?id=1076) kit module that contains a 3d Camera, a display and a flash.
 This All-In-One kit can autonomously, register and then recognise faces.
-*In the link there is only the chip, you need the KIT that has everything*
 It communicates via Serial to an ESP and via ESPHome can be controllable from Home Assistant.
 
 ![20230523_095931](https://github.com/Chreece/FaceRec_ESPHome/assets/68458228/92994688-31d8-4c0b-8c53-ebfb890ee00a)
