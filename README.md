@@ -5,7 +5,7 @@ The module can be easily manipulated to erase and add faces with physical button
 DON'T USE THIS PROJECT TO CONTROL SECURITY MEASURES AS LOCKS etc.
 
 # Description
-It utilizes the [TX510](https://www.hlktech.net/index.php?id=1077&cateid=761) kit module that contains a 3d Camera, a display and a flash.
+It utilizes the [TX510](https://www.hlktech.net/index.php?id=1076) kit module that contains a 3d Camera, a display and a flash.
 This All-In-One kit can autonomously, register and then recognise faces.
 *In the link there is only the chip, you need the KIT that has everything*
 It communicates via Serial to an ESP and via ESPHome can be controllable from Home Assistant.
