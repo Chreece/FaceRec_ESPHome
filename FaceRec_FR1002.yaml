@@ -1,0 +1,155 @@
+substitutions:
+  # change device name to match your desired name
+  device_name: "3dface"
+  # change sensor name below to the one you want to see in Home Assistant
+  device_name_pretty: 3DFace
+
+esphome:
+  name: $device_name
+  friendly_name: $device_name_pretty
+  includes:
+    - fr1002/fr1002.h
+
+esp8266:
+  board: d1_mini
+
+# Enable logging
+logger:
+#  level: VERBOSE
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "svWlH+FL8jyu+eeDao0l/1zE5xZljWK2sl15kJoYbPU="
+
+ota:
+  password: "f4896c7a3eb6073bdd0c460c58e21f88"
+
+wifi:
+  ssid: !secret wifi_ssid_homeauto
+  password: !secret wifi_password_homeauto
+  fast_connect : true
+  domain: ".HomeAuto.Daveys.xyz"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "3Dface Fallback Hotspot"
+    password: "duamVei8cBB5"
+
+web_server:
+  port: 80
+  version: 2
+  include_internal: true
+
+http_request:
+  useragent: esphome/$device_name
+  timeout: 2s
+
+uart:
+  id: uart_bus
+  rx_pin: GPIO3
+  tx_pin: GPIO1
+  baud_rate: 115200
+  debug:
+    direction: BOTH
+    dummy_receiver: false # enabling this, prevents UART byte read in main program, use only for debugging of raw frames and pin assignments
+    sequence:
+      - lambda: UARTDebug::log_hex(direction, bytes, ',');
+
+button:
+  - platform: template
+    name: "Start Identify: ${device_name_pretty}" # Button to start the identification process
+    id: identify
+    entity_category: config
+    on_press:
+      - uart.write: [0xEF, 0xAA, 0x12, 0x00, 0x02, 0x00, 0x02, 0x12]
+  - platform: template
+    name: "Register User: ${device_name_pretty}" # Button to register the user currently facing the camera
+    id: registration
+    entity_category: config
+    on_press:
+      - uart.write: [0xEF, 0xAA, 0x13, 0x00, 0x23, 0x00, 0x00, 0x13]
+  - platform: template
+    name: "Query Num. Reg. UserIDs: ${device_name_pretty}" # Button to query the number of registered faces
+    id: query_num
+    entity_category: config
+    on_press:
+      - uart.write: [0xEF, 0xAA, 0xC4, 0x00, 0x00, 0xC4]
+  - platform: restart
+    name: "Restart MCU: ${device_name_pretty}" # Button to restart your ESP
+    entity_category: diagnostic
+    on_press:
+      - uart.write:
+          id: uart_bus
+          data: "resetSystem 0"
+  - platform: template
+    name: "Reboot FR1002 Module: ${device_name_pretty}"  # Button to reboot the FR1002
+    id: reboot_module
+    entity_category: diagnostic
+    on_press:
+      - uart.write: [0xEF, 0xAA, 0xC3, 0x00, 0x00, 0xC3]
+  - platform: template
+    name: "Query FR1002 Version: ${device_name_pretty}" # Button to query the FR1002 version
+    id: query_version
+    entity_category: diagnostic
+    on_press:
+      - uart.write: [0xEF, 0xAA, 0x30, 0x00, 0x00, 0x30]
+  - platform: template
+    name: "Query FR1002 State: ${device_name_pretty}" # Button to query the FR1002 state
+    id: query_state
+    entity_category: diagnostic
+    on_press:
+      - uart.write: [0xEF, 0xAA, 0x11, 0x00, 0x00, 0x11]
+
+binary_sensor:
+  - platform: template
+    id: presence_template
+    name: "${device_name_pretty} Presence"  # This should indicate if someone is recognised (true) or not (false)
+    device_class: presence
+
+text_sensor:
+  - platform: custom
+    lambda: |-
+      auto my_text_sensor = new UARTSensor(id(uart_bus)); 
+      App.register_component(my_text_sensor);
+      return {my_text_sensor->text_userid, my_text_sensor->text_reply, my_text_sensor->presence_sensor};
+    text_sensors:
+      - id: text_userid
+        name: "internal_text_userid_to_text_template"
+        internal: true
+        on_value:
+           then:
+              - text_sensor.template.publish:
+                  id: user_id_template
+                  state: !lambda return x;
+      - id: text_reply
+        name: "internal_text_reply_to_text_template"
+        internal: true
+        on_value:
+           then:
+              - text_sensor.template.publish:
+                  id: reply_template
+                  state: !lambda return x;
+      - id: presence_sensor
+        name: "internal_presense_sensor_to_binary_template"
+        internal: true
+        on_value:
+          - binary_sensor.template.publish:
+             id: presence_template
+             state: !lambda return x == "on";
+  - platform: template
+    id: user_id_template
+    name: "${device_name_pretty} User ID" # Returns the User ID from the recognised face, note the first face will have the ID 0, so it matches the responce in the display
+  - platform: template
+    id: reply_template
+    name: "${device_name_pretty} Responce"
+
+number:
+  - platform: template
+    name: "${device_name_pretty} User Input"
+    id: user_input
+    optimistic: true
+    min_value: 0
+    max_value: 99
+    step: 1
+    restore_value: true
