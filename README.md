@@ -1,5 +1,7 @@
 # FaceRec (BETA) - Local, Fast, Reliable Face Recognition project.
 
+# Archived project, no longer maintained
+
 # DISCLAIMER
 The module can be easily manipulated to erase and add faces with physical buttons. Please make sure you don't expose them.
 DON'T USE THIS PROJECT TO CONTROL SECURITY MEASURES AS LOCKS etc.
